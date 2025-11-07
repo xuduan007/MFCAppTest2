@@ -214,9 +214,6 @@
     <Image Include="res\MFCApplication2.ico" />
     <Image Include="res\s00.bmp" />
   </ItemGroup>
-  <ItemGroup>
-    <Library Include="lib\MFCLibrary1.lib" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
