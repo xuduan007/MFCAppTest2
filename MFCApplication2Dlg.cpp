@@ -110,11 +110,7 @@ BOOL CMFCApplication2Dlg::OnInitDialog()
 
 void CMFCApplication2Dlg::OnSize(UINT nType, int cx, int cy)
 {
-	CDialog::OnSize(nType, cx, cy);
-
-	CRect rect(0, 0, 100, 200);
-	GetClientRect(&rect);
-	GetDlgItem(IDC_STATIC)->MoveWindow(&rect);
+	CDialog::OnSize(nType, cx, cy);	
 }
 
 void CMFCApplication2Dlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -157,6 +153,21 @@ void CMFCApplication2Dlg::OnPaint()
 	{
 		CDialogEx::OnPaint();
 	}
+
+	CRect rect(100, 0, 200, 300);
+	//GetClientRect(&rect);
+	GetDlgItem(IDC_STATIC)->MoveWindow(&rect);
+
+	CBitmap bitmap;
+	//加载指定位图资源 Bmp图片ID
+	bitmap.LoadBitmap(IDB_BITMAP1);
+	//获取对话框上的句柄 图片控件ID
+	CStatic* p = (CStatic*)GetDlgItem(IDC_STATIC);
+	//设置静态控件窗口风格为位图居中显示
+	p->ModifyStyle(0xf, SS_BITMAP | SS_CENTERIMAGE);
+	//将图片设置到Picture控件上
+	p->SetBitmap(bitmap);
+
 }
 
 //当用户拖动最小化窗口时系统调用此函数取得光标
@@ -175,23 +186,12 @@ void CMFCApplication2Dlg::OnBnClickedOk()
 
 void CMFCApplication2Dlg::OnBnClickedButton1()
 {
+	/*
 	CString text;
 	CWnd* wnd = GetDlgItem(IDC_SHOW);
 	wnd->GetWindowText(text);
 	wnd->SetWindowText(text + _T("Hello, MFC!"));
-
-	CRect rect(100, 100, 200, 300);
-	//GetClientRect(&rect);
-	GetDlgItem(IDC_STATIC)->MoveWindow(&rect);
-	
-	CBitmap bitmap;
-	//加载指定位图资源 Bmp图片ID
-	bitmap.LoadBitmap(IDB_BITMAP1);
-	//获取对话框上的句柄 图片控件ID
-	CStatic* p = (CStatic*)GetDlgItem(IDC_STATIC);
-	//设置静态控件窗口风格为位图居中显示
-	p->ModifyStyle(0xf, SS_BITMAP | SS_CENTERIMAGE);
-	//将图片设置到Picture控件上
-	p->SetBitmap(bitmap);
+	*/
+		
 }
 

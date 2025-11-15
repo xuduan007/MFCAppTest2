@@ -11,6 +11,7 @@
 #define IDB_BITMAP1                     129
 #define IDC_SHOW                        1000
 #define IDC_BUTTON1                     1001
+#define IDC_BUTTON2                     1002
 
 // Next default values for new objects
 // 
