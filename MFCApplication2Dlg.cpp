@@ -55,6 +55,7 @@ CMFCApplication2Dlg::CMFCApplication2Dlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_MFCAPPLICATION2_DIALOG, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	m_pRandomNumberDlg = nullptr;
 }
 
 void CMFCApplication2Dlg::DoDataExchange(CDataExchange* pDX)
@@ -68,7 +69,9 @@ BEGIN_MESSAGE_MAP(CMFCApplication2Dlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CMFCApplication2Dlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BUTTON1, &CMFCApplication2Dlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON_RANDOM, &CMFCApplication2Dlg::OnBnClickedButtonRandom)
 	ON_WM_TIMER()
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -191,7 +194,23 @@ void CMFCApplication2Dlg::OnBnClickedButton1()
 	CWnd* wnd = GetDlgItem(IDC_SHOW);
 	wnd->GetWindowText(text);
 	wnd->SetWindowText(text + _T("Hello, MFC!"));
-	*/
-		
+ 	*/	
+	
+ }
+
+void CMFCApplication2Dlg::OnBnClickedButtonRandom()
+{
+	if (m_pRandomNumberDlg == nullptr || !m_pRandomNumberDlg->IsWindowVisible())
+	{
+		// 创建并显示非模态对话框
+		m_pRandomNumberDlg = new CRandomNumberDialog(this);
+		m_pRandomNumberDlg->Create(IDD_RANDOM_NUMBER_DIALOG, this);
+		m_pRandomNumberDlg->ShowWindow(SW_SHOW);
+	}
+	else
+	{
+		// 如果对话框已存在且可见，将其激活
+		m_pRandomNumberDlg->SetForegroundWindow();
+	}
 }
 

@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "RandomNumberDialog.h"
 
 // CMFCApplication2Dlg 对话框
 class CMFCApplication2Dlg : public CDialogEx
@@ -23,16 +23,18 @@ public:
 
 // 实现
 protected:
-	HICON m_hIcon;
+    HICON m_hIcon;
+    CRandomNumberDialog* m_pRandomNumberDlg;
 
-	// 生成的消息映射函数
-	virtual BOOL OnInitDialog();
-	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
-	afx_msg void OnPaint();
-	afx_msg HCURSOR OnQueryDragIcon();
-	DECLARE_MESSAGE_MAP()
+    // 生成的消息映射函数
+    virtual BOOL OnInitDialog();
+    afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
+    afx_msg void OnPaint();
+    afx_msg HCURSOR OnQueryDragIcon();
+    DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedOk();
-	afx_msg void OnBnClickedButton1();
-	void OnSize(UINT nType, int cx, int cy);
+    afx_msg void OnBnClickedOk();
+    afx_msg void OnBnClickedButton1();
+    afx_msg void OnBnClickedButtonRandom();
+    afx_msg void OnSize(UINT nType, int cx, int cy);
 };
