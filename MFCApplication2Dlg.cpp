@@ -1,4 +1,4 @@
-﻿
+
 // MFCApplication2Dlg.cpp: 实现文件
 //
 
@@ -68,7 +68,7 @@ BEGIN_MESSAGE_MAP(CMFCApplication2Dlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CMFCApplication2Dlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BUTTON1, &CMFCApplication2Dlg::OnBnClickedButton1)
-	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_BUTTON_OS_INFO, &CMFCApplication2Dlg::OnBnClickedButtonOsInfo)
 END_MESSAGE_MAP()
 
 
@@ -182,6 +182,12 @@ void CMFCApplication2Dlg::OnBnClickedOk()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	CDialogEx::OnOK();
+}
+
+void CMFCApplication2Dlg::OnBnClickedButtonOsInfo()
+{
+	COSInfoDialog dlg;
+	dlg.DoModal();
 }
 
 void CMFCApplication2Dlg::OnBnClickedButton1()

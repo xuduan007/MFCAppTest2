@@ -1,9 +1,9 @@
-﻿
+
 // MFCApplication2Dlg.h: 头文件
 //
 
 #pragma once
-
+#include "OSInfoDialog.h"
 
 // CMFCApplication2Dlg 对话框
 class CMFCApplication2Dlg : public CDialogEx
@@ -34,5 +34,6 @@ protected:
 public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedButtonOsInfo();
 	void OnSize(UINT nType, int cx, int cy);
 };
