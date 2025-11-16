@@ -1,4 +1,4 @@
-﻿
+
 // MFCApplication2Dlg.cpp: 实现文件
 //
 
@@ -6,6 +6,7 @@
 #include "framework.h"
 #include "MFCApplication2.h"
 #include "MFCApplication2Dlg.h"
+#include "WeatherDialog.h"
 #include "afxdialogex.h"
 #include <afxtempl.h>
 
@@ -68,11 +69,19 @@ BEGIN_MESSAGE_MAP(CMFCApplication2Dlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CMFCApplication2Dlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BUTTON1, &CMFCApplication2Dlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON_WEATHER, &CMFCApplication2Dlg::OnBnClickedButtonWeather)
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 
 // CMFCApplication2Dlg 消息处理程序
+
+void CMFCApplication2Dlg::OnBnClickedButtonWeather()
+{
+	CWeatherDialog dlg;
+	dlg.m_strWeatherInfo = _T("今日天气：晴\n温度：25°C\n风力：微风");
+	dlg.DoModal();
+}
 
 BOOL CMFCApplication2Dlg::OnInitDialog()
 {
