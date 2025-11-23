@@ -1,38 +1,47 @@
-ï»¿
-// MFCApplication2Dlg.h: å¤´æ–‡ä»¶
+// MFCApplication2Dlg.h: Í·ÎÄ¼ş
 //
 
 #pragma once
 
 
-// CMFCApplication2Dlg å¯¹è¯æ¡†
+// ÒıÓÃĞÂµÄ¶Ô»°¿òÀàÍ·ÎÄ¼ş
+#include "CShapeDialog.h"
+#include "CShowCountDialog.h"
+
+// CMFCApplication2Dlg ¶Ô»°¿ò
 class CMFCApplication2Dlg : public CDialogEx
 {
-// æ„é€ 
+// ¹¹Ôì
 public:
-	CMFCApplication2Dlg(CWnd* pParent = nullptr);	// æ ‡å‡†æ„é€ å‡½æ•°
+    CMFCApplication2Dlg(CWnd* pParent = nullptr);    // ±ê×¼¹¹Ôìº¯Êı
 
-// å¯¹è¯æ¡†æ•°æ®
+// ¶Ô»°¿òÊı¾İ
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_MFCAPPLICATION2_DIALOG };
+    enum { IDD = IDD_MFCAPPLICATION2_DIALOG };
 #endif
 
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV æ”¯æŒ
-
-
-// å®ç°
 protected:
-	HICON m_hIcon;
+    virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
 
-	// ç”Ÿæˆçš„æ¶ˆæ¯æ˜ å°„å‡½æ•°
-	virtual BOOL OnInitDialog();
-	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
-	afx_msg void OnPaint();
-	afx_msg HCURSOR OnQueryDragIcon();
-	DECLARE_MESSAGE_MAP()
+
+// ÊµÏÖ
+protected:
+    HICON m_hIcon;
+    CShapeDialog* m_pModelessDlg;
+
+    // Éú³ÉµÄÏûÏ¢Ó³Éäº¯Êı
+    virtual BOOL OnInitDialog();
+    afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
+    afx_msg void OnPaint();
+    afx_msg HCURSOR OnQueryDragIcon();
+    DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedOk();
-	afx_msg void OnBnClickedButton1();
-	void OnSize(UINT nType, int cx, int cy);
+    afx_msg void OnBnClickedOk();
+    afx_msg void OnBnClickedButton1();
+    void OnSize(UINT nType, int cx, int cy);
+    afx_msg void OnBnClickedModalDlg();
+    afx_msg void OnBnClickedModelessDlg();
+    afx_msg void OnBnClickedShowCount();
+    afx_msg void OnDestroy();
+    afx_msg LRESULT OnModelessDlgClose(WPARAM wParam, LPARAM lParam);
 };
