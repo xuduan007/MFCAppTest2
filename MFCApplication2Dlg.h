@@ -1,31 +1,34 @@
-﻿
-// MFCApplication2Dlg.h: 头文件
+
+// MFCApplication2Dlg.h: ͷ�ļ�
 //
 
 #pragma once
 
+// 前向声明CShapeDialog类
+class CShapeDialog;
 
-// CMFCApplication2Dlg 对话框
+// CMFCApplication2Dlg �Ի���
 class CMFCApplication2Dlg : public CDialogEx
 {
-// 构造
+// ����
 public:
-	CMFCApplication2Dlg(CWnd* pParent = nullptr);	// 标准构造函数
+	CMFCApplication2Dlg(CWnd* pParent = nullptr);	// ��׼���캯��
+	~CMFCApplication2Dlg();
 
-// 对话框数据
+// �Ի�������
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_MFCAPPLICATION2_DIALOG };
 #endif
 
 	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV ֧��
 
 
-// 实现
+// ʵ��
 protected:
 	HICON m_hIcon;
 
-	// 生成的消息映射函数
+	// ���ɵ���Ϣӳ�亯��
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
@@ -34,5 +37,10 @@ protected:
 public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedModalBtn();
+	afx_msg void OnBnClickedModelessBtn();
 	void OnSize(UINT nType, int cx, int cy);
+
+private:
+	CShapeDialog* m_pModelessDlg;
 };
