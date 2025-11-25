@@ -1,31 +1,41 @@
-ï»¿
-// MFCApplication2Dlg.h: å¤´æ–‡ä»¶
+
+// MFCApplication2Dlg.h: Í·ÎÄ¼ş
 //
 
 #pragma once
 
+#include <afxwin.h>
+#include <afxext.h>
+#include <afxcmn.h>
+#include <afxcontrolbars.h>
+#include <afxdialogex.h>
 
-// CMFCApplication2Dlg å¯¹è¯æ¡†
+// ÒıÓÃĞÎ×´¶Ô»°¿òºÍ¼ÆÊı¶Ô»°¿òÀà
+#include "ShapeDialog.h"
+#include "CountDialog.h"
+
+// CMFCApplication2Dlg ¶Ô»°¿ò
 class CMFCApplication2Dlg : public CDialogEx
 {
-// æ„é€ 
+// ¹¹Ôì
 public:
-	CMFCApplication2Dlg(CWnd* pParent = nullptr);	// æ ‡å‡†æ„é€ å‡½æ•°
+	CMFCApplication2Dlg(CWnd* pParent = nullptr);	// ±ê×¼¹¹Ôìº¯Êı
 
-// å¯¹è¯æ¡†æ•°æ®
+// ¶Ô»°¿òÊı¾İ
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_MFCAPPLICATION2_DIALOG };
 #endif
 
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV æ”¯æŒ
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV Ö§³Ö
 
 
-// å®ç°
+// ÊµÏÖ
 protected:
 	HICON m_hIcon;
+	CShapeDialog* m_pModelessDialog;
 
-	// ç”Ÿæˆçš„æ¶ˆæ¯æ˜ å°„å‡½æ•°
+	// Éú³ÉµÄÏûÏ¢Ó³Éäº¯Êı
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
@@ -35,4 +45,9 @@ public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedButton1();
 	void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnBnClickedButton3();
+	afx_msg void OnBnClickedButton4();
+	afx_msg void OnBnClickedButton5();
+
+	int m_totalShapeChanges;
 };
