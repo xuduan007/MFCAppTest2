@@ -1,9 +1,11 @@
-﻿
+
 // MFCApplication2Dlg.h: 头文件
 //
 
 #pragma once
 
+#include "ShapeDialog.h"
+#include "StatisticsDialog.h"
 
 // CMFCApplication2Dlg 对话框
 class CMFCApplication2Dlg : public CDialogEx
@@ -17,13 +19,14 @@ public:
 	enum { IDD = IDD_MFCAPPLICATION2_DIALOG };
 #endif
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
 
 
 // 实现
 protected:
 	HICON m_hIcon;
+	CShapeDialog* m_pModelessDialog;
 
 	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
@@ -35,4 +38,8 @@ public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedButton1();
 	void OnSize(UINT nType, int cx, int cy);
+	afx_msg void OnBnClickedButtonModal();
+	afx_msg void OnBnClickedButtonModeless();
+	afx_msg void OnBnClickedButtonStatistics();
+	virtual void OnDestroy();
 };

@@ -53,6 +53,7 @@ END_MESSAGE_MAP()
 
 CMFCApplication2Dlg::CMFCApplication2Dlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_MFCAPPLICATION2_DIALOG, pParent)
+	, m_pModelessDialog(nullptr)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -62,6 +63,7 @@ void CMFCApplication2Dlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 }
 
+// CMFCApplication2Dlg 消息映射
 BEGIN_MESSAGE_MAP(CMFCApplication2Dlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
@@ -69,6 +71,10 @@ BEGIN_MESSAGE_MAP(CMFCApplication2Dlg, CDialogEx)
 	ON_BN_CLICKED(IDOK, &CMFCApplication2Dlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BUTTON1, &CMFCApplication2Dlg::OnBnClickedButton1)
 	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_BUTTON_MODAL, &CMFCApplication2Dlg::OnBnClickedButtonModal)
+	ON_BN_CLICKED(IDC_BUTTON_MODELLESS, &CMFCApplication2Dlg::OnBnClickedButtonModeless)
+	ON_BN_CLICKED(IDC_BUTTON_STATISTICS, &CMFCApplication2Dlg::OnBnClickedButtonStatistics)
+	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
 
@@ -191,7 +197,51 @@ void CMFCApplication2Dlg::OnBnClickedButton1()
 	CWnd* wnd = GetDlgItem(IDC_SHOW);
 	wnd->GetWindowText(text);
 	wnd->SetWindowText(text + _T("Hello, MFC!"));
-	*/
-		
+	*/	
+	
+}
+
+void CMFCApplication2Dlg::OnBnClickedButtonModal()
+{
+	// 弹出模态对话框
+	CShapeDialog dlgModal;
+	dlgModal.DoModal();
+}
+
+void CMFCApplication2Dlg::OnBnClickedButtonModeless()
+{
+	// 弹出非模态对话框
+	if (m_pModelessDialog == nullptr)
+	{
+		m_pModelessDialog = new CShapeDialog(this);
+		m_pModelessDialog->Create(IDD_SHAPE_DIALOG, this);
+		m_pModelessDialog->ShowWindow(SW_SHOW);
+	}
+}
+
+void CMFCApplication2Dlg::OnBnClickedButtonStatistics()
+{
+	// 弹出统计对话框
+	int nTotalCount = 0;
+	if (m_pModelessDialog != nullptr)
+	{
+		nTotalCount = m_pModelessDialog->GetTotalChangeCount();
+	}
+
+	CStatisticsDialog dlgStats(nTotalCount);
+	dlgStats.DoModal();
+}
+
+void CMFCApplication2Dlg::OnDestroy()
+{
+	// 销毁非模态对话框
+	if (m_pModelessDialog != nullptr)
+	{
+		m_pModelessDialog->DestroyWindow();
+		delete m_pModelessDialog;
+		m_pModelessDialog = nullptr;
+	}
+
+	CDialogEx::OnDestroy();
 }
 
