@@ -1,4 +1,4 @@
-﻿
+
 // MFCApplication2Dlg.cpp: 实现文件
 //
 
@@ -8,6 +8,8 @@
 #include "MFCApplication2Dlg.h"
 #include "afxdialogex.h"
 #include <afxtempl.h>
+#include "NewDialogs/ShapeDialog.h"
+#include "NewDialogs/CountDialog.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -53,6 +55,8 @@ END_MESSAGE_MAP()
 
 CMFCApplication2Dlg::CMFCApplication2Dlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_MFCAPPLICATION2_DIALOG, pParent)
+	, m_pModelessDialog(nullptr)
+	, m_totalChanges(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -68,6 +72,9 @@ BEGIN_MESSAGE_MAP(CMFCApplication2Dlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CMFCApplication2Dlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BUTTON1, &CMFCApplication2Dlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_BUTTON_MODAL, &CMFCApplication2Dlg::OnBnClickedButtonModal)
+	ON_BN_CLICKED(IDC_BUTTON_MODELLESS, &CMFCApplication2Dlg::OnBnClickedButtonModeless)
+	ON_BN_CLICKED(IDC_BUTTON_COUNT, &CMFCApplication2Dlg::OnBnClickedButtonCount)
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
@@ -191,7 +198,44 @@ void CMFCApplication2Dlg::OnBnClickedButton1()
 	CWnd* wnd = GetDlgItem(IDC_SHOW);
 	wnd->GetWindowText(text);
 	wnd->SetWindowText(text + _T("Hello, MFC!"));
-	*/
-		
+	*/		
+
+}
+
+void CMFCApplication2Dlg::OnBnClickedButtonModal()
+{
+	CShapeDialog dlgModal(this);
+	if (dlgModal.DoModal() == IDOK)
+	{
+		m_totalChanges += dlgModal.GetTotalChanges();
+	}
+}
+
+void CMFCApplication2Dlg::OnBnClickedButtonModeless()
+{
+	if (m_pModelessDialog == nullptr)
+	{
+		m_pModelessDialog = new CShapeDialog(this);
+		m_pModelessDialog->Create(IDD_SHAPE_DIALOG, this);
+		m_pModelessDialog->ShowWindow(SW_SHOW);
+	}
+}
+
+void CMFCApplication2Dlg::OnBnClickedButtonCount()
+{
+	CCountDialog dlgCount(m_totalChanges, this);
+	dlgCount.DoModal();
+}
+
+BOOL CMFCApplication2Dlg::DestroyWindow()
+{
+	if (m_pModelessDialog != nullptr)
+	{
+		m_pModelessDialog->DestroyWindow();
+		delete m_pModelessDialog;
+		m_pModelessDialog = nullptr;
+	}
+
+	return CDialogEx::DestroyWindow();
 }
 
