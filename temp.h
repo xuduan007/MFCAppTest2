@@ -1,0 +1,1 @@
+﻿// ShapeDialog.h: 头文件 //  #pragma once  #include <vector> #include <afxwin.h>  // CShapeDialog 对话框 class CShapeDialog : public CDialogEx { // 构造 public:

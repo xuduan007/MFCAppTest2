@@ -75,6 +75,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <CharacterSet>Unicode</CharacterSet>
+    <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>D:\xu_doc\project\MFCApplication2\lib;$(LibraryPath)</LibraryPath>
     <IncludePath>$(IncludePath)</IncludePath>

@@ -1,7 +1,5 @@
-﻿
 // MFCApplication2.cpp: 定义应用程序的类行为。
 //
-
 #include "pch.h"
 #include "framework.h"
 #include "MFCApplication2.h"
@@ -11,16 +9,12 @@
 #define new DEBUG_NEW
 #endif
 
-
 // CMFCApplication2App
-
 BEGIN_MESSAGE_MAP(CMFCApplication2App, CWinApp)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
-
 // CMFCApplication2App 构造
-
 CMFCApplication2App::CMFCApplication2App()
 {
 	// 支持重新启动管理器
@@ -30,14 +24,10 @@ CMFCApplication2App::CMFCApplication2App()
 	// 将所有重要的初始化放置在 InitInstance 中
 }
 
-
 // 唯一的 CMFCApplication2App 对象
-
 CMFCApplication2App theApp;
 
-
 // CMFCApplication2App 初始化
-
 BOOL CMFCApplication2App::InitInstance()
 {
 	// 如果应用程序存在以下情况，Windows XP 上需要 InitCommonControlsEx()
@@ -51,7 +41,6 @@ BOOL CMFCApplication2App::InitInstance()
 	InitCommonControlsEx(&InitCtrls);
 
 	CWinApp::InitInstance();
-
 
 	AfxEnableControlContainer();
 
@@ -95,7 +84,6 @@ BOOL CMFCApplication2App::InitInstance()
 	{
 		delete pShellManager;
 	}
-
 #if !defined(_AFXDLL) && !defined(_AFX_NO_MFC_CONTROLS_IN_DIALOGS)
 	ControlBarCleanUp();
 #endif
@@ -104,4 +92,3 @@ BOOL CMFCApplication2App::InitInstance()
 	//  而不是启动应用程序的消息泵。
 	return FALSE;
 }
-
