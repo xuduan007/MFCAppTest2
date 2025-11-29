@@ -1,4 +1,3 @@
-﻿
 // MFCApplication2Dlg.cpp: 实现文件
 //
 
@@ -7,6 +6,8 @@
 #include "MFCApplication2.h"
 #include "MFCApplication2Dlg.h"
 #include "afxdialogex.h"
+#include "ShapeDialog.h"
+#include "StatsDialog.h"
 #include <afxtempl.h>
 
 #ifdef _DEBUG
@@ -26,7 +27,7 @@ public:
 	enum { IDD = IDD_ABOUTBOX };
 #endif
 
-	protected:
+protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
 
 // 实现
@@ -50,9 +51,9 @@ END_MESSAGE_MAP()
 // CMFCApplication2Dlg 对话框
 
 
-
 CMFCApplication2Dlg::CMFCApplication2Dlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_MFCAPPLICATION2_DIALOG, pParent)
+	: CDialogEx(IDD_MFCAPPLICATION2_DIALOG, pParent),
+	m_pModelessDialog(nullptr)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -68,6 +69,9 @@ BEGIN_MESSAGE_MAP(CMFCApplication2Dlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDOK, &CMFCApplication2Dlg::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BUTTON1, &CMFCApplication2Dlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_MODAL_BUTTON, &CMFCApplication2Dlg::OnBnClickedModalBtn)
+	ON_BN_CLICKED(IDC_MODELESS_BUTTON, &CMFCApplication2Dlg::OnBnClickedModelessBtn)
+	ON_BN_CLICKED(IDC_STATS_BUTTON, &CMFCApplication2Dlg::OnBnClickedStatsBtn)
 	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
@@ -100,8 +104,8 @@ BOOL CMFCApplication2Dlg::OnInitDialog()
 
 	// 设置此对话框的图标。  当应用程序主窗口不是对话框时，框架将自动
 	//  执行此操作
-	SetIcon(m_hIcon, TRUE);			// 设置大图标
-	SetIcon(m_hIcon, FALSE);		// 设置小图标
+	SetIcon(m_hIcon, TRUE);            // 设置大图标
+	SetIcon(m_hIcon, FALSE);        // 设置小图标
 
 	// TODO: 在此添加额外的初始化代码
 
@@ -110,7 +114,7 @@ BOOL CMFCApplication2Dlg::OnInitDialog()
 
 void CMFCApplication2Dlg::OnSize(UINT nType, int cx, int cy)
 {
-	CDialog::OnSize(nType, cx, cy);	
+	CDialog::OnSize(nType, cx, cy);
 }
 
 void CMFCApplication2Dlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -125,6 +129,7 @@ void CMFCApplication2Dlg::OnSysCommand(UINT nID, LPARAM lParam)
 		CDialogEx::OnSysCommand(nID, lParam);
 	}
 }
+
 
 // 如果向对话框添加最小化按钮，则需要下面的代码
 //  来绘制该图标。  对于使用文档/视图模型的 MFC 应用程序，
@@ -159,15 +164,14 @@ void CMFCApplication2Dlg::OnPaint()
 	GetDlgItem(IDC_STATIC)->MoveWindow(&rect);
 
 	CBitmap bitmap;
-	//加载指定位图资源 Bmp图片ID
+	//加载指定位置图资源 Bmp图片ID
 	bitmap.LoadBitmap(IDB_BITMAP1);
 	//获取对话框上的句柄 图片控件ID
 	CStatic* p = (CStatic*)GetDlgItem(IDC_STATIC);
-	//设置静态控件窗口风格为位图居中显示
+	//设置控件显示风格为位图居中显示
 	p->ModifyStyle(0xf, SS_BITMAP | SS_CENTERIMAGE);
-	//将图片设置到Picture控件上
+	//将图片设置到Picture控件中
 	p->SetBitmap(bitmap);
-
 }
 
 //当用户拖动最小化窗口时系统调用此函数取得光标
@@ -192,6 +196,29 @@ void CMFCApplication2Dlg::OnBnClickedButton1()
 	wnd->GetWindowText(text);
 	wnd->SetWindowText(text + _T("Hello, MFC!"));
 	*/
-		
 }
 
+void CMFCApplication2Dlg::OnBnClickedModalBtn()
+{
+	// 弹出模态对话框
+	CShapeDialog dlg;
+	dlg.DoModal();
+}
+
+void CMFCApplication2Dlg::OnBnClickedModelessBtn()
+{
+	// 弹出非模态对话框
+	if (m_pModelessDialog == nullptr)
+	{
+		m_pModelessDialog = new CShapeDialog(this);
+		m_pModelessDialog->Create(IDD_SHAPE_DIALOG, this);
+	}
+	m_pModelessDialog->ShowWindow(SW_SHOW);
+}
+
+void CMFCApplication2Dlg::OnBnClickedStatsBtn()
+{
+	// 弹出统计对话框
+	CStatsDialog dlg;
+	dlg.DoModal();
+}

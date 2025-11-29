@@ -1,25 +1,24 @@
-﻿
-// MFCApplication2Dlg.h: 头文件
+// MFCApplication2Dlg.h: 主头文件
 //
-
 #pragma once
 
+#include "ShapeDialog.h"
+#include "StatsDialog.h"
 
 // CMFCApplication2Dlg 对话框
 class CMFCApplication2Dlg : public CDialogEx
 {
 // 构造
 public:
-	CMFCApplication2Dlg(CWnd* pParent = nullptr);	// 标准构造函数
+	CMFCApplication2Dlg(CWnd* pParent = nullptr);   // 标准构造函数
 
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
 	enum { IDD = IDD_MFCAPPLICATION2_DIALOG };
 #endif
 
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
-
+protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
 
 // 实现
 protected:
@@ -34,5 +33,10 @@ protected:
 public:
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedButton1();
+	afx_msg void OnBnClickedModalBtn();
+	afx_msg void OnBnClickedModelessBtn();
+	afx_msg void OnBnClickedStatsBtn();
 	void OnSize(UINT nType, int cx, int cy);
+private:
+	CShapeDialog* m_pModelessDialog; // 非模态对话框指针
 };

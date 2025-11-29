@@ -1,0 +1,7 @@
+生成开始于 23:20...
+1>------ 已启动生成: 项目: MFCApplication2, 配置: Debug x64 ------
+1>未能写入日志文件“D:\xu_doc\project\git\MFCAppTest2\MFCApplication2\x64\Debug\MFCApplication2.log”。文件“D:\xu_doc\project\git\MFCAppTest2\MFCApplication2\x64\Debug\MFCApplication2.log”正由另一进程使用，因此该进程无法访问此文件。
+1>未能写入日志文件“D:\xu_doc\project\git\MFCAppTest2\MFCApplication2\x64\Debug\MFCApplication2.log”。文件“D:\xu_doc\project\git\MFCAppTest2\MFCApplication2\x64\Debug\MFCApplication2.log”正由另一进程使用，因此该进程无法访问此文件。
+========== 生成: 0 成功，1 失败，0 最新，0 已跳过 ==========
+========== 生成 于 23:20 完成，耗时 02.949 秒 ==========
+
